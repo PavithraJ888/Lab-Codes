@@ -1,0 +1,4 @@
+strings = ["apple", "banana", "kiwi", "orange", "grapes"]
+string_lengths = [(s, len(s)) for s in strings]
+sorted_string_lengths = sorted(string_lengths, key=lambda x: x[1])
+print(sorted_string_lengths)

@@ -1,0 +1,51 @@
+create table PERSON(Did VARCHAR(10) PRIMARY KEY,Pname VARCHAR(10),Address VARCHAR(60));
+create table CAR(Regno VARCHAR(10) PRIMARY KEY,Model VARCHAR(20),Year INT);
+create table ACCIDENT(Repno INT PRIMARY KEY,Date DATE,Loc VARCHAR(20));
+create table OWNS(Odid  VARCHAR(10),Oregno VARCHAR(10),Primary Key(Odid,Oregno),Foreign key(Odid) references PERSON(Did) on delete cascade,
+Foreign key(Oregno) references CAR(Regno) on delete cascade);
+create table PARTICIPATED (Pdid VARCHAR(10),Pregno VARCHAR(10),Prepno INT,Damage INT,Primary key(Pdid, Pregno, Prepno),
+Foreign key (Pdid) references PERSON(Did) on delete cascade, Foreign key (Pregno) references CAR(Regno) on delete cascade,
+Foreign key(Prepno) references ACCIDENT(Repno) on delete cascade);
+ 
+//insert values
+insert into PERSON values('1','Steve','Frankfurt');
+insert into PERSON values('2','Dustin','Perryridge');
+insert into PERSON values('3','Mike','Brooklyn');
+insert into PERSON values('4','Lucas','Perryridge ');
+insert into PERSON values('5','John',' Brooklyn ');
+insert into PERSON values('6','Antony','Hellington');
+insert into CAR values('KA04','BMW',2000);
+insert into CAR values('KA05','Ford',2002);
+insert into CAR values('KA03','Maruthi',1999);
+insert into CAR values('KA02','Tata',2002);
+insert into CAR values('KA01', 'Audi',2003);
+insert into CAR values('KA08', 'Maruthi',2003);
+insert into CAR values('KA06', 'Maruthi',2003);
+insert into CAR values('KA07', 'BMW',2003);
+insert into ACCIDENT values(12,'01-Jun-2001','Frankfurt');
+insert into ACCIDENT values(25,'02-Jul-2002','Brooklyn');
+insert into ACCIDENT values(512,'08-Mar-2000',' Brooklyn');
+insert into ACCIDENT values(1024,'25-Oct-2002','AvenueRoad');
+insert into ACCIDENT values(1000,'23-Dec-2003','RichmondCircle');
+insert into ACCIDENT values(1,'25-Dec-2004','ParkStreet');
+insert into OWNS values('1', 'KA04');
+insert into OWNS values('1', 'KA06');
+insert into OWNS values('2', 'KA07');
+insert into OWNS values('2', 'KA05');
+insert into OWNS values('3', 'KA03');
+insert into OWNS values('4', 'KA02');
+insert into OWNS values('5', 'KA01');
+insert into OWNS values('6', 'KA08');
+insert  into PARTICIPATED values('1', 'KA04',12,1000);
+insert  into PARTICIPATED values('1', 'KA06',25,1500);
+insert  into PARTICIPATED values('2', 'KA05',512,1500);
+insert  into PARTICIPATED values('2', 'KA05',1024,2500);
+insert  into PARTICIPATED values('3', 'KA03',1000,1700);
+insert  into PARTICIPATED values('4', 'KA02',1,100);
+ 
+//Display unique car Regnos involved in accidents.
+Select distinct (Pregno) from PARTICIPATED;
+//Display the car Regno and model which has the maximum damage amount.
+Select  Pregno,Model from CAR, PARTICIPATED where Pregno=Regno and Damage in (select max(Damage) from PARTICIPATED);
+//Display no. of cars owned by each driver.
+Select  Odid,count(*) as no_of_cars from OWNS group by Odid;

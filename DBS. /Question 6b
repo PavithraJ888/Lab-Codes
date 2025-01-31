@@ -1,0 +1,10 @@
+db.createCollection("tourist")
+
+db.tourist.insert([{place:"bangalore",address:"karnataka",id:1,tour_att:"att1",time:"jan",mode:"train",acc:"acc1",food:"chicken"}])
+db.tourist.insert([{place:"kochi",address:"kerala",id:2,tour_att:"att2",time:"feb",mode:"boat",acc:"acc2",food:"fish fry"}])
+db.tourist.insert([{place:"agra",address:"delhi",id:3,tour_att:"taj mahal",time:"march",mode:"car",acc:"acc3",food:"petha"}])
+ 
+//List all the tourist places of Karnataka.
+db.tourist.find({address:"karnataka"},{tour_att:true}).pretty()
+//List the places sorted state wise.
+db.tourist.find({},{place:1}).sort({address:1})

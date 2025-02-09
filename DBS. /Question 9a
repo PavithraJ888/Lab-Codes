@@ -1,0 +1,49 @@
+Create table CUSTOMER(Cno INT,Cname VARCHAR(50),Ccity VARCHAR(50),Primary key(Cno));
+Create table ORDER1(Ono INT,Odate DATE,Ocno INT,Oamt INT, Primary key(Ono),Foreign Key(Ocno) references CUSTOMER(Cno) on delete cascade);
+Create table ITEM(Ino INT ,Uprice INT,Primary key(Ino));
+Create table ORDER_ITEM(Iono INT,Oino  INT,Qty INT, Primary key(Iono,Oino),Foreign Key(Iono) references ORDER1(Ono) on delete cascade, 
+                        Foreign Key(Oino) references ITEM(Ino) on delete cascade);
+Create table WAREHOUSE(Wno INT,Wcity VARCHAR(50),Primary Key(Wno));
+Create table SHIPMENT(Sono INT,Swno INT,Shipdate DATE,Primary key(Sono,Swno),Foreign Key(Sono) references ORDER1(Ono) on delete cascade, 
+                        Foreign Key(Swno) references WAREHOUSE(Wno) on delete cascade);
+ 
+//insert values
+Insert into CUSTOMER values (1,'Archie','Bangalore');
+Insert into CUSTOMER values (2,'Veronica','Bangalore');
+Insert into CUSTOMER values (3,'Betty','Mysore');
+Insert into CUSTOMER values (4,'Jughead','Bangalore');
+Insert into CUSTOMER values (5,'Cheryl','Mysore');
+Insert into CUSTOMER values (6,'Jason','Mangalore');
+Insert into ORDER1 values (1, '01-Jun-2016',1,1000);
+Insert into ORDER1 values (2, '03-Jun-2016',1,2000);
+Insert into ORDER1 values (3, '03-Jun-2016',3,3000);
+Insert into ORDER1 values (4, '05-Jun-2016',4,4000);
+Insert into ORDER1 values (5, '06-Jun-2017',5,5000);
+Insert into ITEM values(1,100);
+Insert into ITEM values(2,200);
+Insert into ITEM values(3,300);
+Insert into ITEM values(4,400);
+Insert into ITEM values(10,500);
+Insert into ORDER_ITEM values(1,1,2);
+Insert into ORDER_ITEM values(1,2,1);
+Insert into ORDER_ITEM values(2,3,2);
+Insert into ORDER_ITEM values(3,4,3);
+Insert into ORDER_ITEM values(4,3,1);
+Insert into ORDER_ITEM values(5,2,1);
+Insert into WAREHOUSE values(1,'Bangalore');
+Insert into WAREHOUSE values(2,'Bangalore');
+Insert into WAREHOUSE values(3,'Mysore');
+Insert into WAREHOUSE values(4,'Mangalore');
+Insert into WAREHOUSE values(5,'Mangalore');
+Insert into SHIPMENT values(1,1,'03-Jun-2016');
+Insert into SHIPMENT values(2,1,'03-Jun-2016');
+Insert into SHIPMENT values(3,2,'05-Jun-2016');
+Insert into SHIPMENT values(4,3,'05-Jun-2016');
+Insert into SHIPMENT values(5,4,'06-Jun-2016');
+
+//List the customer names who have placed more than 2 orders
+Select Cname FROM CUSTOMER where  (Select count(Ono) from ORDER1 where Cno=Ocno)>=2;
+//Find the total order amount for each day.
+Select Odate,SUM(Oamt) from ORDER1 group by Odate;
+//List customer details who has the largest order amount.
+Select Cno,Cname,Ccity from CUSTOMER,ORDER1 where Cno=Ocno and Oamt in(select max(Oamt) from ORDER1)

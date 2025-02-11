@@ -1,0 +1,15 @@
+db.createCollection("movie")
+
+//insert values
+db.movie.insert([{act_n:"ram",act_id:13,act_bdate:"2/3/1997",dir_n:"williams",dir_id:101,dir_bdate:"12/9/1987",film:"battleship",year:2015,type:"thriller"}])
+db.movie.insert([{act_n:"john",act_id:11,act_bdate:"1/2/1998",dir_n:"ram",dir_id:100,dir_bdate:"2/3/1997",film:"john wick",year:2012,type:"killer"}])
+db.movie.insert([{act_n:"elly",act_id:12,act_bdate:"4/12/1998",dir_n:"ram",dir_id:100,dir_bdate:"2/3/1997",film:"aquaman",year:2012,type:"action"}])
+db.movie.insert([{act_n:"ram",act_id:13,act_bdate:"2/3/1997",dir_n:"thomas",dir_id:103,dir_bdate:"12/3/1999",film:"xxx",year:2018,type:"action"}])
+db.movie.insert([{act_n:"john",act_id:11,act_bdate:"1/2/1998",dir_n:"ram",dir_id:100,dir_bdate:"2/3/1997",film:"mr.bean",year:2018,type:"comedy"}])
+ 
+
+//List all the movies acted by John and Elly in the year 2012.
+db.movie.find({$and : [{act_n:{$in : ["john","elly"]}},{year:2012}]},{film:1}).pretty()
+
+//List only the name and type of the movie where Ram has acted sorted by movie names.
+db.movie.find({act_n:"ram"},{film:1,type:1}).sort({film:1}).pretty()

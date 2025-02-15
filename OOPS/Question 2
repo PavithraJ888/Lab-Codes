@@ -1,0 +1,86 @@
+import java.util.*;
+
+// Abstract class Vehicle
+abstract class Vehicle {
+    boolean hashelmet;
+    int yom;
+
+    // Abstract methods
+    abstract void getData();
+    abstract void putData();
+
+    // Constructor to initialize 'hashelmet' and 'yom'
+    Vehicle(boolean h, int n) {
+        hashelmet = h;
+        yom = n;
+    }
+}
+
+// Derived class TwoWheeler
+class TwoWheeler extends Vehicle {
+    private String Brand; // private access modifier
+    protected int Cost;   // protected access modifier
+    String EngineType;    // friendly (default) access modifier
+    public String Color;  // public access modifier
+
+    // Constructor calling the parent class constructor
+    TwoWheeler(int n) {
+        super(true, n); // 'true' as it has a helmet for TwoWheeler
+    }
+
+    // Overriding getData() to collect data for TwoWheeler
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Two Wheeler details: Brand, Cost, EngineType, and Color");
+        Brand = sc.next();
+        Cost = sc.nextInt();
+        EngineType = sc.next();
+        Color = sc.next();
+    }
+
+    // Overriding putData() to display TwoWheeler details
+    void putData() {
+        System.out.println("\nThe details of Two Wheeler");
+        System.out.println("Brand: " + Brand + "\nCost: " + Cost + "\nEngineType: " + EngineType
+                + "\nColor: " + Color + "\nYear of Manufacture: " + yom + "\nHas helmet: " + hashelmet);
+    }
+}
+
+// Final class FourWheeler (no class can inherit from it)
+final class FourWheeler extends Vehicle {
+
+    // Constructor calling the parent class constructor
+    FourWheeler(int n) {
+        super(false, n); // 'false' as it doesn't have a helmet for FourWheeler
+    }
+
+    // Overriding getData() for FourWheeler (though not used here)
+    void getData() {
+        // Leaving this method empty, as FourWheeler doesn't need to collect data in this example
+    }
+
+    // Overriding putData() to display FourWheeler details
+    void putData() {
+        System.out.println("\nThe details of Four Wheeler");
+        System.out.println("Year of Manufacture: " + yom + "\nHas helmet: " + hashelmet);
+    }
+}
+
+// Main class to demonstrate the functionality
+public class Program1 {
+    public static void main(String[] args) {
+        // Cannot instantiate an abstract class 'Vehicle'
+        // Vehicle v = new Vehicle(); // Error
+
+        // Creating instances of TwoWheeler and FourWheeler
+        TwoWheeler t1 = new TwoWheeler(1995);
+        FourWheeler f1 = new FourWheeler(2006);
+
+        // Collecting and displaying data for TwoWheeler
+        t1.getData();
+        t1.putData();
+
+        // Displaying data for FourWheeler (no data collection in this case)
+        f1.putData();
+    }
+}

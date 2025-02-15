@@ -1,0 +1,153 @@
+// Abstract class Shape
+abstract class Shape {
+    String color;
+    boolean filled;
+
+    // No-argument constructor that initializes color to "green" and filled to true
+    Shape() {
+        color = "green";
+        filled = true;
+    }
+
+    // Constructor that initializes color and filled to the given values
+    Shape(String c, boolean f) {
+        color = c;
+        filled = f;
+    }
+
+    // Getter for color
+    String getColor() {
+        return color;
+    }
+
+    // Setter for color
+    void setColor(String c) {
+        this.color = c;
+    }
+
+    // Getter for filled (boolean)
+    boolean isFilled() {
+        return filled;
+    }
+
+    // Setter for filled (boolean)
+    void setFilled(boolean b) {
+        this.filled = b;
+    }
+
+    // toString() method to describe the shape
+    @Override
+    public String toString() {
+        if (this.filled) {
+            return "A Shape with color " + this.color + " and filled.";
+        } else {
+            return "A Shape with color " + this.color + " and not filled.";
+        }
+    }
+
+    // Abstract method to calculate area, to be implemented by subclasses
+    abstract double getArea();
+}
+
+// Circle class extends Shape
+class Circle extends Shape {
+    int r;
+
+    // Constructor with radius, default color and filled values
+    Circle(int r1) {
+        super(); // Calls the no-argument constructor of Shape
+        r = r1;
+    }
+
+    // Constructor with color, filled status, and radius
+    Circle(String c, boolean f, int r1) {
+        super(c, f); // Calls the constructor of Shape with color and filled values
+        r = r1;
+    }
+
+    // Override getArea() method to calculate area of circle
+    @Override
+    double getArea() {
+        return Math.PI * r * r; // Area = πr^2
+    }
+
+    // Display the details of Circle
+    void display() {
+        System.out.println("\nDisplaying the details of Circle:");
+        System.out.println("Filled: " + isFilled());
+        System.out.println("Color: " + getColor());
+    }
+
+    // Change the color and filled status of the circle
+    void change(String c, boolean b) {
+        setColor(c);
+        setFilled(b);
+    }
+}
+
+// Final class Rectangle extends Shape (cannot be inherited further)
+final class Rectangle extends Shape {
+    int a, b;
+
+    // Constructor with default color and filled values
+    Rectangle(int a1, int b1) {
+        super(); // Calls the no-argument constructor of Shape
+        a = a1;
+        b = b1;
+    }
+
+    // Constructor with color, filled status, and dimensions
+    Rectangle(String c, boolean f, int a1, int b1) {
+        super(c, f); // Calls the constructor of Shape with color and filled values
+        a = a1;
+        b = b1;
+    }
+
+    // Override getArea() method to calculate area of rectangle
+    @Override
+    double getArea() {
+        return a * b; // Area = length * breadth
+    }
+}
+
+// Class Square attempts to inherit from Rectangle (will not compile, as Rectangle is final)
+class Square extends Rectangle {
+
+    // Constructor for Square
+    Square(int side) {
+        super(side, side); // Calls Rectangle's constructor to initialize both sides equal
+    }
+
+    // Display the dimensions of the Square
+    void display() {
+        System.out.println("Square dimensions: " + a + " x " + b);
+    }
+}
+
+// Driver class
+public class Program2 {
+    public static void main(String[] args) {
+        // Shape s = new Shape(); // Cannot create an instance of the abstract class Shape
+
+        // Creating an instance of Circle with specific color, filled status, and radius
+        Circle c = new Circle("blue", false, 5);
+        
+        // Creating an instance of Rectangle with specific color, filled status, and dimensions
+        Rectangle r = new Rectangle("red", true, 2, 4);
+
+        // Display details of the Circle and Rectangle
+        System.out.println(c); // Will call toString() method from Shape
+        System.out.println(r); // Will call toString() method from Shape
+
+        // Display the areas
+        System.out.println("\nArea of Circle: " + c.getArea());
+        System.out.println("Area of Rectangle: " + r.getArea());
+
+        // Display Circle details
+        c.display();
+
+        // Change Circle properties and display again
+        c.change("brown", true);
+        c.display();
+    }
+}

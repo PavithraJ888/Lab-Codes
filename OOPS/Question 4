@@ -1,0 +1,95 @@
+import java.util.Scanner;
+
+// Abstract class Student
+abstract class Student {
+    private String name;  // Private member variable for student's name
+    protected int ID;     // Protected member variable for student's ID
+    double grade;         // Grade is a double, used for student's grade
+    public int age;       // Public member variable for student's age
+
+    // Abstract method to check if the student has passed
+    abstract boolean isPassed(double grade);
+
+    // Final method that sets the student's name, cannot be overridden by subclasses
+    final void setter(String name) {
+        this.name = name;
+    }
+
+    // Getter method to return the student's name
+    String getter() {
+        return name;
+    }
+}
+// Subclass Undergrad inherits from Student
+class Undergrad extends Student {
+
+    // Method to get the student's data
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter Name, ID, age:");
+        setter(sc.next()); // Set the student's name using setter
+        ID = sc.nextInt(); // Set the student's ID
+        age = sc.nextInt(); // Set the student's age
+    }
+
+    // Override the isPassed method to define the passing condition for Undergrad
+    boolean isPassed(double grade) {
+        this.grade = grade;
+        return grade > 70; // Pass if grade > 70
+    }
+
+    // Display student information
+    void display() {
+        System.out.println("Name: " + getter() + "\nAge: " + age + "\nID: " + ID);
+    }
+}
+
+// Subclass Grad inherits from Student
+class Grad extends Student {
+
+    // Method to get the student's data
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter Name, ID, age:");
+        setter(sc.next()); // Set the student's name using setter
+        ID = sc.nextInt(); // Set the student's ID
+        age = sc.nextInt(); // Set the student's age
+    }
+
+    // Override the isPassed method to define the passing condition for Grad
+    boolean isPassed(double grade) {
+        this.grade = grade;
+        return grade > 80; // Pass if grade > 80
+    }
+
+    // Display student information
+    void display() {
+        System.out.println("Name: " + getter() + "\nAge: " + age + "\nID: " + ID);
+    }
+}
+
+// Test class to demonstrate functionality of the Student, Undergrad, and Grad classes
+public class Program {
+    public static void main(String[] args) {
+
+        // Create an Undergrad object
+        Undergrad undergrad = new Undergrad();
+        undergrad.getData(); // Get data for Undergrad student
+        if (undergrad.isPassed(75)) { // Check if Undergrad has passed
+            System.out.println("Undergrad student has passed.\n");
+        } else {
+            System.out.println("Undergrad student has failed.\n");
+        }
+        undergrad.display(); // Display Undergrad student details
+
+        // Create a Grad object
+        Grad grad = new Grad();
+        grad.getData(); // Get data for Grad student
+        if (grad.isPassed(85)) { // Check if Grad has passed
+            System.out.println("Grad student has passed.\n");
+        } else {
+            System.out.println("Grad student has failed.\n");
+        }
+        grad.display(); // Display Grad student details
+    }
+}

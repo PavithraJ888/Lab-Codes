@@ -1,0 +1,99 @@
+// Superclass Car
+class Car {
+    int speed;
+    double regularPrice;
+    String color;
+
+    // Constructor for Car class
+    Car(int s, double price, String c) {
+        speed = s;
+        regularPrice = price;
+        color = c;
+    }
+
+    // Method to return the regular sale price
+    double getSalePrice() {
+        return regularPrice;
+    }
+}
+
+// Subclass Truck inheriting from Car
+class Truck extends Car {
+    int weight;
+
+    // Constructor for Truck class
+    Truck(int s, double price, String c, int w) {
+        super(s, price, c);
+        weight = w;
+    }
+
+    // Method to calculate sale price with discount based on weight
+    double getSalePrice() {
+        if (weight > 2000) {
+            regularPrice = regularPrice * 0.9; // 10% discount
+        } else {
+            regularPrice = regularPrice * 0.8; // 20% discount
+        }
+        return regularPrice;
+    }
+}
+
+// Subclass Ford inheriting from Car
+class Ford extends Car {
+    int manufacturerDiscount;
+    int year;
+
+    // Constructor for Ford class
+    Ford(int s, double price, String c, int m) {
+        super(s, price, c);
+        manufacturerDiscount = m;
+    }
+
+    // Method to calculate sale price after manufacturer discount
+    double getSalePrice() {
+        regularPrice -= manufacturerDiscount;
+        return regularPrice;
+    }
+}
+
+// Subclass Sedan inheriting from Car
+class Sedan extends Car {
+    int length;
+
+    // Constructor for Sedan class
+    Sedan(int s, double price, String c, int l) {
+        super(s, price, c);
+        length = l;
+    }
+
+    // Method to calculate sale price based on the length
+    double getSalePrice() {
+        if (length > 20) {
+            regularPrice = regularPrice * 0.95; // 5% discount
+        } else {
+            regularPrice = regularPrice * 0.9; // 10% discount
+        }
+        return regularPrice;
+    }
+}
+
+// Main class MyOwnAutoShop
+public class Program4 {
+    public static void main(String[] args) {
+        // Create an instance of Truck
+        Truck t = new Truck(65, 2500000, "Red", 3000);
+        System.out.println("Price of truck is " + t.getSalePrice());
+
+        // Create an instance of Car
+        Car c = new Car(100, 800000, "Black");
+        System.out.println("Price of Car is " + c.getSalePrice());
+
+        // Create an instance of Ford
+        Ford f = new Ford(120, 2200000, "Yellow", 120000);
+        System.out.println("Price of Ford is " + f.getSalePrice());
+
+        // Create an instance of Sedan
+        Sedan s = new Sedan(100, 3500000, "Blue", 22);
+        System.out.println("Price of Sedan is " + s.getSalePrice());
+    }
+}

@@ -1,0 +1,54 @@
+// Class SavingsAccount
+class SavingsAccount {
+    // Static variable to store the annual interest rate for all account holders
+    static double annualInterestRate;
+    
+    // Private data member for the savings balance of each account holder
+    private double savingsBalance;
+
+    // Constructor to initialize the savings balance
+    SavingsAccount(double balance) {
+        savingsBalance = balance;
+    }
+
+    // Static method to modify the annual interest rate
+    static void modifyInterestRate(double newInterestRate) {
+        annualInterestRate = newInterestRate;
+    }
+
+    // Method to calculate the monthly interest and update the savings balance
+    void calculateMonthlyInterest() {
+        double interest = (savingsBalance * annualInterestRate) / 12;
+        savingsBalance += interest;
+    }
+
+    // Method to display the current balance
+    void display() {
+        System.out.println("Current Balance: Rs." + savingsBalance);
+    }
+}
+
+// Main class Program5 to test the SavingsAccount class
+public class Program5 {
+    public static void main(String[] args) {
+        // Create two SavingsAccount objects with initial balances
+        SavingsAccount saver1 = new SavingsAccount(2000);
+        SavingsAccount saver2 = new SavingsAccount(3000);
+
+        // Set the annual interest rate to 4% and calculate monthly interest for both savers
+        SavingsAccount.modifyInterestRate(4);
+        System.out.println("After setting annual interest rate to 4%:");
+        saver1.calculateMonthlyInterest();
+        saver2.calculateMonthlyInterest();
+        saver1.display();
+        saver2.display();
+
+        // Change the annual interest rate to 5% and calculate monthly interest again
+        SavingsAccount.modifyInterestRate(5);
+        System.out.println("\nAfter setting annual interest rate to 5%:");
+        saver1.calculateMonthlyInterest();
+        saver2.calculateMonthlyInterest();
+        saver1.display();
+        saver2.display();
+    }
+}

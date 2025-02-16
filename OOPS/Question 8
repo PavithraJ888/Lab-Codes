@@ -1,0 +1,155 @@
+class Person {
+    private String name;
+    private String address;
+
+    Person(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    String getAddress() {
+        return address;
+    }
+
+    void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String toString() {
+        return name + "(" + address + ")";
+    }
+}
+
+class Student1 extends Person {
+    int numCourses = 0;
+    String courses[] = new String[30];
+    int grades[] = new int[30];
+
+    Student1(String name, String address) {
+        super(name, address);
+    }
+
+    void addCourseGrade(String course, int grade) {
+        if (numCourses < 30) {
+            courses[numCourses] = course;
+            grades[numCourses] = grade;
+            numCourses++;
+        } else {
+            System.out.println("Maximum number of courses reached.");
+        }
+    }
+
+    void printGrades() {
+        for (int i = 0; i < numCourses; i++)
+            System.out.println("Course: " + courses[i] + " Grade: " + grades[i]);
+    }
+
+    double getAverageGrades() {
+        double total = 0;
+        for (int i = 0; i < numCourses; i++) {
+            total += grades[i];
+        }
+        return total / numCourses;
+    }
+
+    public String toString() {
+        return getName() + "(" + getAddress() + ")";
+    }
+}
+
+class Teacher extends Person {
+    int numCourses = 0;
+    String courses[] = new String[5];
+
+    Teacher(String name, String address) {
+        super(name, address);
+    }
+
+    boolean addCourse(String course) {
+        if (numCourses < 5) {
+            for (int i = 0; i < numCourses; i++) {
+                if (courses[i].equals(course))
+                    return false; // Course already exists
+            }
+            
+            courses[numCourses] = course;
+            numCourses++;
+            return true;
+        }
+        return false; // Max limit of 5 courses reached
+    }
+
+    boolean removeCourse(String course) {
+        if (numCourses > 0) {
+            for (int i = 0; i < numCourses; i++) {
+                if (courses[i].equals(course)) {
+                    // Shift remaining courses left
+                    for (int j = i; j < numCourses - 1; j++) {
+                        courses[j] = courses[j + 1];
+                    }
+                    courses[numCourses - 1] = null;  // Clear the last element
+                    numCourses--;
+                    return true;  // Course removed successfully
+                }
+            }
+            return false;  // Course not found
+        }
+        return false;  // No courses to remove
+    }
+
+    public String toString() {
+        return getName() + "(" + getAddress() + ")";
+    }
+}
+
+public class Program7 {
+    public static void main(String[] args) {
+        // Test Student
+        Student1 s = new Student1("Raju", "Bangalore");
+        System.out.println(s);
+        s.addCourseGrade("Maths", 85);
+        s.addCourseGrade("OOPS", 80);
+        s.addCourseGrade("DS", 75);
+        s.addCourseGrade("DMS", 70);
+        s.printGrades();
+        System.out.println("Average Grade: " + s.getAverageGrades());
+
+        // Test Teacher
+        Teacher t = new Teacher("CC", "DD");
+        if (t.addCourse("Maths"))
+            System.out.println("Course 'Maths' added.");
+        else
+            System.out.println("Max limit reached or course already exists.");
+
+        if (t.addCourse("Maths"))
+            System.out.println("Course 'Maths' added.");
+        else
+            System.out.println("Max limit reached or course already exists.");
+
+        if (t.addCourse("OOPS"))
+            System.out.println("Course 'OOPS' added.");
+        else
+            System.out.println("Max limit reached or course already exists.");
+
+        if (t.addCourse("DS"))
+            System.out.println("Course 'DS' added.");
+        else
+            System.out.println("Max limit reached or course already exists.");
+
+        // Attempt to remove a course
+        if (t.removeCourse("Maths"))
+            System.out.println("Course 'Maths' removed.");
+        else
+            System.out.println("Course does not exist or no courses to remove.");
+
+        // Attempt to remove a non-existent course
+        if (t.removeCourse("TOC"))
+            System.out.println("Course 'TOC' removed.");
+        else
+            System.out.println("Course does not exist or no courses to remove.");
+    }
+}

@@ -1,0 +1,116 @@
+class Customer {
+    private int ID;
+    private String Name;
+    private int discount;
+
+    // Constructor to initialize the customer
+    Customer(int ID, String Name, int discount) {
+        this.Name = Name;
+        this.ID = ID;
+        this.discount = discount;
+    }
+
+    // Getter methods
+    int getID() {
+        return ID;
+    }
+
+    String getName() {
+        return Name;
+    }
+
+    int getDiscount() {
+        return discount;
+    }
+
+    // Setter method for discount
+    void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    // Overridden toString method to display customer details in the format: Name(ID)
+    public String toString() {
+        return Name + "(" + ID + ")";
+    }
+}
+
+class Invoice {
+    private int ID;
+    private Customer customer;
+    private double amount;
+
+    // Constructor to initialize the invoice
+    Invoice(int ID, Customer customer, double amount) {
+        this.ID = ID;
+        this.customer = customer;
+        this.amount = amount;
+    }
+
+    // Getter methods for invoice
+    int getID() {
+        return ID;
+    }
+
+    Customer getCustomer() {
+        return customer;
+    }
+
+    void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    String getAmount() {
+        return Double.toString(amount);
+    }
+
+    void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    // Method to get the customer name from the invoice
+    String getCustomerName() {
+        return customer.getName();
+    }
+
+    // Method to calculate the amount after applying the customer's discount
+    double getAmountAfterDiscount() {
+        return amount - (amount * customer.getDiscount() / 100);
+    }
+}
+
+public class Program6 {
+    public static void main(String[] args) {
+        // Create a customer object 'c' with ID 25, Name "Raju" and Discount 5%
+        Customer c = new Customer(25, "Raju", 5);
+        System.out.println("The details of first customer:");
+        System.out.println(c.getID()); // Prints: 25
+        System.out.println(c.getDiscount()); // Prints: 5
+        System.out.println(c.getName()); // Prints: Raju
+        
+        // Change the discount for 'c' and print the updated discount
+        c.setDiscount(7);
+        System.out.println("After discount:");
+        System.out.println(c.getDiscount()); // Prints: 7
+        System.out.println(c); // Prints: Raju(25)
+
+        // Create another customer object 'c1' with ID 26, Name "Ram" and Discount 9%
+        Customer c1 = new Customer(26, "Ram", 9);
+
+        // Create an invoice object 'i' for customer 'c1' with Invoice ID 28 and amount 60000
+        Invoice i = new Invoice(28, c1, 60000);
+        System.out.println("\nInvoice details:");
+        System.out.println(i.getID()); // Prints: 28
+        System.out.println(i.getCustomer()); // Prints: Ram(26)
+        System.out.println(i.getAmount()); // Prints: 60000.0
+        
+        // Change the amount of the invoice and print the updated amount
+        i.setAmount(70000);
+        System.out.println(i.getAmount()); // Prints: 70000.0
+        
+        // Get customer name from the invoice and print it
+        System.out.println(i.getCustomerName()); // Prints: Ram
+        
+        // Calculate and print the amount after applying the discount
+        System.out.println(i.getAmountAfterDiscount()); // Prints: 63700.0
+    }
+}

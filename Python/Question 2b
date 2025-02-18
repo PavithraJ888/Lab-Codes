@@ -1,0 +1,59 @@
+# Creating a list of subject names for the 4th semester
+subjects = [
+    "Data Structures",
+    "Discrete Mathematics",
+    "Operating Systems",
+    "Database Management Systems",
+    "Computer Networks",
+    "Python Programming Lab",
+    "Software Engineering",
+    "Computer Graphics"
+]
+
+# Display the list using a for loop
+print("Displaying the list using a for loop:")
+for subject in subjects:
+    print(subject)
+
+# Display 2nd and 5th element of the list
+print("\n2nd and 5th element of the list:")
+print(f"2nd element: {subjects[1]}")
+print(f"5th element: {subjects[4]}")
+
+# Display first 4 elements of the list using the range of indexes
+print("\nFirst 4 elements of the list:")
+print(subjects[0:4])
+
+# Display last 4 elements of the list using the range of negative indexes
+print("\nLast 4 elements of the list:")
+print(subjects[-4:])
+
+# Display if "Python Programming Lab" is available in the List or not
+print("\nIs 'Python Programming Lab' available in the list?")
+if "Python Programming Lab" in subjects:
+    print("Yes, 'Python Programming Lab' is available in the list.")
+else:
+    print("No, 'Python Programming Lab' is not available in the list.")
+
+# Demonstrating the working of append() and insert() function
+# Using append() to add a new subject at the end of the list
+subjects.append("Artificial Intelligence")
+print("\nList after appending 'Artificial Intelligence':")
+print(subjects)
+
+# Using insert() to add a new subject at a specific index
+subjects.insert(3, "Machine Learning")  # Inserting at index 3
+print("\nList after inserting 'Machine Learning' at index 3:")
+print(subjects)
+
+# Demonstrating the working of remove() and pop() function
+# Using remove() to remove a specific subject
+subjects.remove("Operating Systems")
+print("\nList after removing 'Operating Systems':")
+print(subjects)
+
+# Using pop() to remove the last subject in the list
+removed_subject = subjects.pop()  # Pop the last element
+print(f"\nList after popping the last subject ('{removed_subject}'):")
+print(subjects)
+

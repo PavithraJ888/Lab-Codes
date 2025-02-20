@@ -1,0 +1,22 @@
+# Create an initial tuple
+my_tuple = (1, 2, 3, 'apple', 'banana')
+
+# 1. Adding an item (we'll create a new tuple with the added item)
+item_to_add = 'orange'
+my_tuple = my_tuple + (item_to_add,)
+print(f"Tuple after adding an item: {my_tuple}")
+
+# 2. Displaying the length of the tuple
+tuple_length = len(my_tuple)
+print(f"Length of the tuple: {tuple_length}")
+
+# 3. Checking for an item in the tuple
+item_to_check = 'apple'
+if item_to_check in my_tuple:
+    print(f"Item '{item_to_check}' is present in the tuple.")
+else:
+    print(f"Item '{item_to_check}' is not present in the tuple.")
+
+# 4. Accessing an item (using indexing)
+index_to_access = 2
+print(f"Item at index {index_to_access}: {my_tuple[index_to_access]}")

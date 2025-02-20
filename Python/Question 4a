@@ -1,0 +1,53 @@
+# Initialize the dictionary with usernames and passwords
+passwd = {
+    'rahul': 'genius',
+    'kumar': 'smart',
+    'ankita': 'intelligent'
+}
+
+# Function to print all items (usernames and passwords)
+def print_all_items():
+    print("All items in the dictionary:")
+    for user, password in passwd.items():
+        print(f"{user}: {password}")
+
+# Function to print all keys (usernames)
+def print_all_keys():
+    print("\nAll keys in the dictionary (Usernames):")
+    for user in passwd.keys():
+        print(user)
+
+# Function to print all values (passwords)
+def print_all_values():
+    print("\nAll values in the dictionary (Passwords):")
+    for password in passwd.values():
+        print(password)
+
+# Function to get the password of a user
+def get_password(username):
+    if username in passwd:
+        print(f"\nThe password of {username} is: {passwd[username]}")
+    else:
+        print(f"\nNo user found with the username: {username}")
+
+# Function to change the password of a particular user
+def change_password(username, new_password):
+    if username in passwd:
+        passwd[username] = new_password
+        print(f"\nPassword of {username} has been changed to: {new_password}")
+    else:
+        print(f"\nNo user found with the username: {username}")
+
+# Calling the functions to demonstrate the functionality
+print_all_items()  # Print all items (usernames and passwords)
+print_all_keys()   # Print all keys (usernames)
+print_all_values() # Print all values (passwords)
+
+# Get the password of a specific user
+get_password('rahul')
+
+# Change the password of a particular user
+change_password('ankita', 'brilliant')
+
+# Verify the password change
+print_all_items()  # Print all items again to verify the change

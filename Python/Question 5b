@@ -1,0 +1,35 @@
+# Create a text file and ask the user to enter 5-6 lines of text
+file_name = "user_text.txt"
+
+# Open the file in write mode to add text
+with open(file_name, 'w') as file:
+    print("Please enter 5-6 lines of text (Press Enter after each line):")
+    for _ in range(6):  # Ask the user to enter 6 lines
+        line = input(f"Enter line {_ + 1}: ")
+        file.write(line + "\n")  # Write each line to the file
+
+# Read the contents of the file
+with open(file_name, 'r') as file:
+    lines = file.readlines()
+
+# Initialize variables to keep track of the shortest and longest words
+longest_word = ""
+shortest_word = None
+
+for line in lines:
+    words = line.split()  # Split the line into words
+    for word in words:
+        # Strip punctuation from words
+        word = word.strip('.,!?";:()')
+
+        # Update the longest word if the current word is longer
+        if len(word) > len(longest_word):
+            longest_word = word
+
+        # Update the shortest word if it's the first word or the current word is shorter
+        if shortest_word is None or len(word) < len(shortest_word):
+            shortest_word = word
+
+# Display the longest and shortest words and their lengths
+print(f"\nLongest word: {longest_word} (Length: {len(longest_word)})")
+print(f"Shortest word: {shortest_word} (Length: {len(shortest_word)})")

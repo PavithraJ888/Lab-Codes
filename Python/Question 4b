@@ -1,0 +1,22 @@
+import re
+
+def count_occurrences(text):
+    # Regular expression patterns for vowels, consonants, and digits
+    vowels_pattern = r'[aeiouAEIOU]'
+    consonants_pattern = r'[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]'
+    digits_pattern = r'[0-9]'
+
+    # Count the occurrences of vowels, consonants, and digits using regex
+    vowels_count = len(re.findall(vowels_pattern, text))
+    consonants_count = len(re.findall(consonants_pattern, text))
+    digits_count = len(re.findall(digits_pattern, text))
+
+    # Display the results
+    print(f"Vowels Count: {vowels_count}")
+    print(f"Consonants Count: {consonants_count}")
+    print(f"Digits Count: {digits_count}")
+
+text = "Hello World! This is a test string with some numbers 12345."
+
+# Call the function to count the occurrences
+count_occurrences(text)

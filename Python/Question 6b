@@ -1,0 +1,49 @@
+class InsufficientBalanceError(Exception):
+    def __init__(self, message="Insufficient balance for withdrawal"):
+        self.message = message
+        super().__init__(self.message)
+
+
+class InvalidAmountError(Exception):
+    def __init__(self, message="Amount should be greater than zero"):
+        self.message = message
+        super().__init__(self.message)
+
+
+class SavingAccount:
+    def __init__(self, account_holder, balance=0):
+        self.account_holder = account_holder
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount <= 0:
+            raise InvalidAmountError("Deposit amount must be greater than zero.")
+        self.balance += amount
+        print(f"Deposited ${amount}. New balance: ${self.balance}")
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            raise InvalidAmountError("Withdrawal amount must be greater than zero.")
+        if amount > self.balance:
+            raise InsufficientBalanceError(f"Cannot withdraw ${amount}. Insufficient balance.")
+        self.balance -= amount
+        print(f"Withdrew ${amount}. New balance: ${self.balance}")
+
+    def check_balance(self):
+        print(f"Current balance: ${self.balance}")
+
+    def display_account_info(self):
+        print(f"Account Holder: {self.account_holder}")
+        self.check_balance()
+
+
+# Example usage:
+try:
+    account = SavingAccount("John Doe", 500)
+    account.display_account_info()
+
+    account.deposit(200)
+    account.withdraw(100)
+    account.withdraw(700)  # This will raise InsufficientBalanceError
+except (InvalidAmountError, InsufficientBalanceError) as e:
+    print(e)

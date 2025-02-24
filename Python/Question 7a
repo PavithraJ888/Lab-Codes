@@ -1,0 +1,59 @@
+# Stack class
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        return "Stack is empty!"
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        return "Stack is empty!"
+
+
+# Queue class
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.queue.pop(0)
+        return "Queue is empty!"
+
+    def is_empty(self):
+        return len(self.queue) == 0
+
+    def front(self):
+        if not self.is_empty():
+            return self.queue[0]
+        return "Queue is empty!"
+
+
+# Test Stack
+stack = Stack()
+stack.push(10)
+stack.push(20)
+stack.push(30)
+print(stack.pop())  # 30
+print(stack.peek())  # 20
+
+# Test Queue
+queue = Queue()
+queue.enqueue(5)
+queue.enqueue(15)
+queue.enqueue(25)
+print(queue.dequeue())  # 5
+print(queue.front())  # 15

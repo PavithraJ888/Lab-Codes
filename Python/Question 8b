@@ -1,0 +1,28 @@
+def count_file_details(file_name):
+    with open(file_name, 'r') as file:
+        content = file.read()
+
+    uppercase_count = sum(1 for char in content if char.isupper())
+    lowercase_count = sum(1 for char in content if char.islower())
+    digit_count = sum(1 for char in content if char.isdigit())
+
+    return uppercase_count, lowercase_count, digit_count
+
+# Create a text file and ask user to enter text
+file_name = "user_input.txt"
+
+with open(file_name, 'w') as file:
+    print("Please enter 5-6 lines of text (press Enter after each line). When you are done, type 'END' on a new line.")
+    while True:
+        user_input = input()
+        if user_input.strip().upper() == 'END':
+            break
+        file.write(user_input + "\n")
+
+# Count and display file details
+uppercase_count, lowercase_count, digit_count = count_file_details(file_name)
+
+print("\nDetails of the file:")
+print(f"Total Uppercase Letters: {uppercase_count}")
+print(f"Total Lowercase Letters: {lowercase_count}")
+print(f"Total Digits: {digit_count}")

@@ -1,0 +1,22 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+iris = pd.read_csv("iris.csv")
+
+# 1. Visualize the dataset
+iris.plot()
+plt.show()
+
+# 2. Scatter plot for 'petal.length' vs 'sepal.length'
+iris.plot(kind='scatter', x='petal.length', y='sepal.length')
+plt.show()
+
+# 3. Scatter plot with different colors
+plt.scatter(iris['petal.length'], iris['sepal.length'], c='green')
+plt.scatter(iris['petal.width'], iris['sepal.width'], c='red')
+plt.show()
+
+# 4. Histogram for 'petal.length'
+iris['petal.length'].plot(kind='hist')
+plt.show()

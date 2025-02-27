@@ -1,0 +1,22 @@
+def handle_exceptions():
+    try:
+        num1 = int(input("Enter the first number: "))
+        num2 = int(input("Enter the second number: "))
+        result = num1 / num2
+
+    except ValueError:
+        print("Error: Please enter a valid integer.")
+
+    except ZeroDivisionError:
+        print("Error: Division by zero is not allowed.")
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+    else:
+        print(f"Division successful! The result is: {result}")
+
+    finally:
+        print("Execution finished. Thank you for using the program.")
+
+handle_exceptions()

@@ -1,0 +1,24 @@
+def handle_specific_exceptions():
+    try:
+        print(undeclared_variable)
+    except NameError:
+        print("Error: NameError - Variable is not defined.")
+
+    try:
+        my_list = [1, 2, 3]
+        print(my_list[5])
+    except IndexError:
+        print("Error: IndexError - List index out of range.")
+
+    try:
+        my_dict = {"name": "Alice", "age": 25}
+        print(my_dict["address"])
+    except KeyError:
+        print("Error: KeyError - Key not found in the dictionary.")
+
+    try:
+        result = 10 / 0
+    except ZeroDivisionError:
+        print("Error: ZeroDivisionError - Division by zero is not allowed.")
+
+handle_specific_exceptions()

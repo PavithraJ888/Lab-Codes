@@ -1,0 +1,27 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris = sns.load_dataset('iris')
+
+# Display first 5 rows of the dataset
+print("First 5 rows of the dataset:")
+print(iris.head())
+
+# Display last 5 rows of the dataset
+print("\nLast 5 rows of the dataset:")
+print(iris.tail())
+
+# Display information about the dataset
+print("\nInformation about the dataset:")
+print(iris.info())
+
+# Display the overview of the values of each column (describe)
+print("\nOverview of the values of each column:")
+print(iris.describe())
+
+# Visualize the dataset using plot()
+print("\nVisualizing the dataset using plot()")
+iris.plot(kind='scatter', x='sepal_length', y='sepal_width', c='species', colormap='viridis')
+plt.title('Sepal Length vs Sepal Width')
+plt.show()

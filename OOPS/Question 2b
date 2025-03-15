@@ -1,0 +1,83 @@
+import java.util.*;
+
+// Abstract class Vehicle
+abstract class Vehicle {
+    boolean hashelmet;
+    int yom; // Year of Manufacture
+
+    // Abstract methods
+    abstract void getData();
+    abstract void putData();
+
+    // Constructor for Vehicle class
+    Vehicle(boolean h, int n) {
+        hashelmet = h;
+        yom = n;
+    }
+}
+
+// TwoWheeler class extends Vehicle
+class TwoWheeler extends Vehicle {
+    private String Brand;
+    protected int Cost;
+    String EngineType;
+    public String Color;
+
+    // Constructor for TwoWheeler class
+    TwoWheeler(int n) {
+        super(true, n); // Call the Vehicle constructor with hashelmet=true
+    }
+
+    // Method to get data from user
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Two Wheeler details: Its Brand name, Cost, EngineType, and Colour");
+        Brand = sc.next();
+        Cost = sc.nextInt();
+        EngineType = sc.next();
+        Color = sc.next();
+    }
+
+    // Method to print data
+    void putData() {
+        System.out.println("\nThe details of Two Wheeler:");
+        System.out.println("Brand: " + Brand + "\nCost: " + Cost + "\nEngine Type: " + EngineType + "\nColor: " + Color
+                + "\nYear of Manufacture: " + yom + "\nHas helmet: " + hashelmet);
+    }
+}
+
+// Final class FourWheeler extends Vehicle
+final class FourWheeler extends Vehicle {
+
+    // Constructor for FourWheeler class
+    FourWheeler(int n) {
+        super(false, n); // Call the Vehicle constructor with hashelmet=false
+    }
+
+    // Method to get data (currently not implemented)
+    void getData() {
+        // No data to get for FourWheeler
+    }
+
+    // Method to print data
+    void putData() {
+        System.out.println("\nThe details of Four Wheeler:");
+        System.out.println("Year of Manufacture: " + yom + "\nHas helmet: " + hashelmet);
+    }
+}
+
+// Main class to run the program
+public class Program1 {
+    public static void main(String[] args) {
+        // Cannot create instance of an abstract class directly
+        TwoWheeler t1 = new TwoWheeler(1995);
+        FourWheeler f1 = new FourWheeler(2006);
+
+        // Get and display data for TwoWheeler
+        t1.getData();
+        t1.putData();
+
+        // Display data for FourWheeler
+        f1.putData();
+    }
+}

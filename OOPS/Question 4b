@@ -1,0 +1,95 @@
+import java.util.*;
+
+// Abstract class Student
+abstract class Student {
+    private String Name;    
+    protected int ID;      
+    double grade;          
+    public int age;         
+
+    // Abstract method to check if student has passed based on the grade
+    abstract boolean isPassed(double Grade);
+
+    // Final method to set the student's name (can't be overridden in subclasses)
+    final void setter(String name) {
+        Name = name;
+    }
+
+    // Getter method to retrieve the student's name
+    String getter() {
+        return Name;
+    }
+}
+
+// Undergrad class extends Student
+class Undergrad extends Student {
+    // Method to get student data
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter Name, ID, age");
+        setter(sc.next());   // Set the name using setter method
+        ID = sc.nextInt();   // Set the ID
+        age = sc.nextInt();  // Set the age
+    }
+
+    // Method to check if an undergrad student has passed based on their grade
+    boolean isPassed(double Grade) {
+        grade = Grade;
+        return grade > 70;   // Return true if grade is greater than 70
+    }
+
+    // Method to display student details
+    void display() {
+        System.out.println("Name: " + getter() + "\nAge: " + age + "\nID: " + ID);
+    }
+}
+
+// Grad class extends Student
+class Grad extends Student {
+    // Method to get student data
+    void getData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter Name, ID, age");
+        setter(sc.next());   // Set the name using setter method
+        ID = sc.nextInt();   // Set the ID
+        age = sc.nextInt();  // Set the age
+    }
+
+    // Method to check if a grad student has passed based on their grade
+    boolean isPassed(double Grade) {
+        grade = Grade;
+        return grade > 80;   // Return true if grade is greater than 80
+    }
+
+    // Method to display student details
+    void display() {
+        System.out.println("Name: " + getter() + "\nAge: " + age + "\nID: " + ID);
+    }
+}
+
+// Main class to run the program
+public class Program3 {
+    public static void main(String[] args) {
+        // Create an instance of Undergrad
+        Undergrad u = new Undergrad();
+        u.getData();  // Get data for the Undergrad student
+        if (u.isPassed(65))  // Check if the undergrad student has passed
+            System.out.println("Student has passed\n");
+        else
+            System.out.println("Student has failed\n");
+
+        u.display();  // Display the undergrad student's details
+
+        // Create an instance of Grad
+        Grad g = new Grad();
+        g.getData();  
+
+        // Check if the grad student has passed
+        if (g.isPassed(90))
+            System.out.println("Student has passed\n");
+        else
+            System.out.println("Student has failed\n");
+
+        g.display();  // Display the grad student's details
+    }
+}
